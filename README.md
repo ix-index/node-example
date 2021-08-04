@@ -26,7 +26,7 @@ To authenticate, we have to add our API token into the header of the `axios` ins
 In addition, we can set the `baseURL` for the instance, so we do not have to type in the `baseURL` every requests.
 
 ```
-const baseUrl = '{{BASE_URL}}';
+const baseUrl = 'https://api.ix-index.com/v1/';
 
 const token = '<your api token>';
 
@@ -68,7 +68,7 @@ start();
 var axios = require('axios');
 const moment = require('moment');
 
-const baseUrl = '{{BASE_URL}}';
+const baseUrl = 'https://api.ix-index.com/v1/';
 
 const token = '<your api token>';
 
