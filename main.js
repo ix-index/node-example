@@ -1,4 +1,5 @@
 var axios = require('axios');
+const moment = require('moment');
 
 const baseUrl = 'https://api.ix-index.com/v1/';
 
@@ -16,5 +17,11 @@ const fetchData = async() => {
 	var data = response.data.data;
 	console.log(data.value);
 }
-	
-setInterval(fetchData, 15000);
+
+const start = async() => {
+	await fetchData();
+	const timestamp = moment().unix();
+	setTimeout(start, (15 - timestamp % 15));
+}
+
+start();
