@@ -3,18 +3,20 @@ This example is using `axios` to connect to the API.
 
 ## Prerequisites
 
-Before your program connects to the API, you should install the `axios` library.
+Before your program connects to the API, you should install the `axios` and `moment` libraries.
 
-To install `axios`, type in the below command in your terminal.
+To install `axios` and `moment`, type in the below command in your terminal.
 
 ```
 npm install axios
+npm install moment
 ```
 
-Now you are ready to start using Node JS to interact with the API, make sure you required the `axios` library into the script.
+Now you are ready to start using Node JS to interact with the API, make sure you required the `axios` and `moment` libraries into the script.
 
 ```
 var axios = require('axios');
+const moment = require('moment');
 ```
 
 ## Authentication
@@ -24,7 +26,7 @@ To authenticate, we have to add our API token into the header of the `axios` ins
 In addition, we can set the `baseURL` for the instance, so we do not have to type in the `baseURL` every requests.
 
 ```
-const baseUrl = 'https://api.ix-index.com/v1/';
+const baseUrl = '{{BASE_URL}}';
 
 const token = '<your api token>';
 
@@ -48,7 +50,13 @@ const fetchData = async() => {
 ## Fetching Data with 15 seconds interval
 The IX Index series updates their data every 15 seconds. To fetch the data from the API with 15 seconds interval, you can use the code below.
 ```
-setInterval(fetchData, 15000);
+const start = async() => {
+	await fetchData();
+	const timestamp = moment().unix();
+	setTimeout(start, (15 - timestamp % 15));
+}
+
+start();
 ```
 
 ## Complete Example
@@ -58,8 +66,9 @@ setInterval(fetchData, 15000);
 
 ```
 var axios = require('axios');
+const moment = require('moment');
 
-const baseUrl = 'https://api.ix-index.com/v1/';
+const baseUrl = '{{BASE_URL}}';
 
 const token = '<your api token>';
 
@@ -76,5 +85,11 @@ const fetchData = async() => {
 	console.log(data.value);
 }
 
-setInterval(fetchData, 15000);
+const start = async() => {
+	await fetchData();
+	const timestamp = moment().unix();
+	setTimeout(start, (15 - timestamp % 15));
+}
+
+start();
 ```
