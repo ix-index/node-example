@@ -13,7 +13,7 @@ const instance = axios.create({
 });
 
 const fetchData = async() => {
-	var response = await instance.get('index/ixci');
+	var response = await instance.get('real-time/ixci');
 	var data = response.data.data;
 	console.log(data.value);
 }
