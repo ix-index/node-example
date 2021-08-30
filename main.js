@@ -21,7 +21,7 @@ const fetchData = async() => {
 const start = async() => {
 	await fetchData();
 	const timestamp = moment().unix();
-	setTimeout(start, (15 - timestamp % 15));
+	setTimeout(start, (15 - timestamp % 15) * 1000);
 }
 
 start();
